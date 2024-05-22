@@ -35,6 +35,14 @@ export async function broadwayDirect({ browser, userInfo, url }) {
     // Agree to terms
     await page.locator("#dlslot_agree").check({ force: true });
 
+    const captchaCheckbox = await page.locator("#dlslot-recaptcha-js");
+
+    // Check if the checkbox exists
+    if (captchaCheckbox) {
+      // Click the checkbox to mark it as checked
+      await captchaCheckbox.click();
+    }
+
     // Submit the form
     await page.getByLabel("Enter").click();
 
